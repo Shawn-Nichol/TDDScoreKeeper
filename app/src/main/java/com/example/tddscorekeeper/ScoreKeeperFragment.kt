@@ -15,11 +15,11 @@ class ScoreKeeperFragment : Fragment() {
 
 
     private lateinit var binding: FragmentScoreKeeperBinding
-
+    private lateinit var  viewModel: MyViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        viewModel = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -28,17 +28,11 @@ class ScoreKeeperFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score_keeper, container, false )
-        binding.binding = this
 
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
-    }
-
-    fun countUp() {
-
-    }
-
-    fun countDown() {
-
     }
 }

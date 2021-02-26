@@ -1,8 +1,12 @@
 package com.example.tddscorekeeper
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+
+
+val SHARED_PREF_KEY = "SharedPreferences Key"
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -10,7 +14,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        // ViewModel need to pass in the repsositor will need a factory for this.
-        val viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        val sharedPreferences = this.getSharedPreferences(SHARED_PREF_KEY, Context.MODE_PRIVATE)
+
+        val repository = Repository(sharedPreferences)
+        val viewModelFactory: MyViewModelFactory = MyViewModelFactory(repository)
+        ViewModelProvider(this, viewModelFactory).get(MyViewModel::class.java)
     }
+
+
+
 }
