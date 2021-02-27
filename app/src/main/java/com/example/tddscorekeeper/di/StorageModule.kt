@@ -9,10 +9,10 @@ import dagger.Module
 /**
  * Tells dagger its a module.
  */
-@Module
-abstract class StorageModule {
-
-    // Makes Dagger provide SharedPreferenceStorage when a storage type is requested
-    @Binds
-    abstract fun provideStorage(storage: SharedPreferenceStorage): Storage
-}
+//@Module
+//abstract class StorageModule {
+//
+//    // Makes Dagger provide SharedPreferenceStorage when a storage type is requested
+//    @Binds
+//    abstract fun provideStorage(storage: SharedPreferenceStorage): Storage
+//}

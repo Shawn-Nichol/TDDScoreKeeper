@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
-class MyViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class MyViewModel @Inject constructor()  {
 
 
     val score = Score()
@@ -19,7 +19,7 @@ class MyViewModel @Inject constructor(private val repository: Repository) : View
     val scoreLiveData: LiveData<Int> = _scoreLiveData
 
     fun highScore() {
-        _highScoreLiveData.value = repository.loadHighScore()
+      //  _highScoreLiveData.value = repository.loadHighScore()
     }
 
     fun increaseScore() {
