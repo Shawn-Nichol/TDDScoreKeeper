@@ -3,8 +3,10 @@ package com.example.tddscorekeeper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class MyViewModel(private val repository: Repository) : ViewModel() {
+class MyViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+
 
     val score = Score()
 

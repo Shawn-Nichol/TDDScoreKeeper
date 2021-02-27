@@ -1,6 +1,8 @@
 package com.example.tddscorekeeper
 
-class Score {
+
+
+class Score  {
 
     var highScore = 0
     var currentScore = 0

@@ -1,18 +1,18 @@
 package com.example.tddscorekeeper
 
-import android.content.SharedPreferences
 
-class Repository(private val sharedPreferences: SharedPreferences) {
+import com.example.tddscorekeeper.storage.HIGHSCORE_KEY
+import com.example.tddscorekeeper.storage.Storage
+import javax.inject.Inject
+
+
+class Repository @Inject constructor(val storage: Storage) {
 
     fun saveScore(highScore: Int) {
-        with(sharedPreferences.edit()) {
-            putInt("High Score", highScore)
-
-            commit()
-        }
+        storage.setInt(HIGHSCORE_KEY, highScore)
     }
 
     fun loadHighScore(): Int {
-        return sharedPreferences.getInt("High Score", 10)
+        return storage.getInt(HIGHSCORE_KEY)
     }
 }
