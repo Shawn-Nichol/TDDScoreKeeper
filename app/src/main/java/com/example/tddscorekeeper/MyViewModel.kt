@@ -1,14 +1,21 @@
 package com.example.tddscorekeeper
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class MyViewModel @Inject constructor()  {
+@Singleton
+class MyViewModel @Inject constructor(val score: Score)  {
+
+    init {
+        Log.i("MyTEST", "Should only run once. ")
+    }
 
 
-    val score = Score()
+    var myScore = 0
 
 
 

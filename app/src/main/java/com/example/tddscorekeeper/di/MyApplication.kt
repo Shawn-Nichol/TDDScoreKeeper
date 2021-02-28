@@ -1,14 +1,12 @@
 package com.example.tddscorekeeper.di
 
 import android.app.Application
+import com.example.tddscorekeeper.di.DaggerAppComponent
 
-//class MyApplication : Application() {
-//    // Instance of the AppComponent that will be used by all the Activities in the project.
-//    val appComponent: AppComponent by lazy {
-//        // Create an instance of AppComponent using its Factory constructor
-//        // we pass the applicationContext that will be useed as Context in the graph.
-//        DaggerAppComponent.factory().create(applicationContext)
-//    }
-//
-//
-//}
+class MyApplication : Application() {
+        //val appComponent = DaggerAppComponent.create()
+        val appComponent: AppComponent by lazy {
+                DaggerAppComponent.factory().create(applicationContext)
+        }
+
+}
