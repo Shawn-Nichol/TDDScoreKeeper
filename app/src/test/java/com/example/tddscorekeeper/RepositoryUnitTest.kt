@@ -2,6 +2,8 @@ package com.example.tddscorekeeper
 
 import android.app.Application
 import android.content.SharedPreferences
+import com.example.tddscorekeeper.storage.HIGHSCORE_KEY
+import com.example.tddscorekeeper.storage.Storage
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Before
 import org.junit.Test
@@ -13,39 +15,60 @@ import org.mockito.junit.MockitoJUnitRunner
 class RepositoryUnitTest {
 
 
-    @Mock
-    lateinit var sharedPreferencesEditor: SharedPreferences.Editor
-
-    @Mock
-    lateinit var sharedPreferences: SharedPreferences
-
     lateinit var repository: Repository
 
+    @Mock
+    lateinit var storage: Storage
 
     @Before
     fun setup() {
-        whenever(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
-        repository = Repository(sharedPreferences)
+        repository = Repository(storage)
     }
 
     @Test
-    fun saveScore_toPreference() {
-        val score = 25
-        repository.saveScore(score)
+    fun saveScore() {
+        val score = 20
+        repository.saveScore(20)
 
-        // saves
-        inOrder(sharedPreferencesEditor)
-            verify(sharedPreferencesEditor).putInt(any(), eq(score))
-            verify(sharedPreferencesEditor).commit()
+        verify(storage.setInt(HIGHSCORE_KEY, score))
     }
 
-    @Test
-    fun loadHighScore() {
-        repository.loadHighScore()
-
-        inOrder(sharedPreferences)
-        verify(sharedPreferences).getInt(any(), any())
-
-
-    }
+//    @Mock
+//    lateinit var sharedPreferencesEditor: SharedPreferences.Editor
+//
+//    @Mock
+//    lateinit var sharedPreferences: SharedPreferences
+//
+//    @Mock
+//    lateinit var storage: Storage
+//
+//    lateinit var repository: Repository
+//
+//
+//    @Before
+//    fun setup() {
+//        whenever(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
+//        repository = Repository(storage)
+//    }
+//
+//    @Test
+//    fun saveScore_toPreference() {
+//        val score = 25
+//        repository.saveScore(score)
+//
+//        // saves
+//        inOrder(sharedPreferencesEditor)
+//            verify(sharedPreferencesEditor).putInt(any(), eq(score))
+//            verify(sharedPreferencesEditor).commit()
+//    }
+//
+//    @Test
+//    fun loadHighScore() {
+//        repository.loadHighScore()
+//
+//        inOrder(sharedPreferences)
+//        verify(sharedPreferences).getInt(any(), any())
+//
+//
+//    }
 }

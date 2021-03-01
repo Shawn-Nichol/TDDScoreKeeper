@@ -1,8 +1,9 @@
 package com.example.tddscorekeeper
 
+import javax.inject.Inject
 
 
-class Score  {
+class Score @Inject constructor()  {
 
     var highScore = 0
     var currentScore = 0

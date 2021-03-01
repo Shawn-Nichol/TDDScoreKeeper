@@ -2,20 +2,25 @@ package com.example.tddscorekeeper.di
 
 import android.content.Context
 import com.example.tddscorekeeper.MainActivity
+import com.example.tddscorekeeper.ScoreKeeperFragment
+import com.example.tddscorekeeper.databinding.FragmentScoreKeeperBinding
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [StorageModule::class])
 interface AppComponent {
 
     // Factory to create instances of the AppComponent
     @Component.Factory
     interface Factory {
-        // With @BindInstance, the Context passed in will be available in the graph.
-        fun create(@BindsInstance context: Context)
+        // With @BindsInstance, the Context passed in will be available in the graph
+        fun create(@BindsInstance context: Context): AppComponent
     }
 
     // Classes that can be injected by this component
     fun inject(activity: MainActivity)
+    fun inject(fragment: ScoreKeeperFragment)
 
 }
