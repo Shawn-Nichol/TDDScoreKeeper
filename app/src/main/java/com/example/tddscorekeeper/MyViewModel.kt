@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MyViewModel @Inject constructor(val score: Score, val repository: Repository)  {
+class MyViewModel @Inject constructor(val score: Score, val repository: Repository): ViewModel()  {
 
     var logScore = 0
 
@@ -25,6 +25,8 @@ class MyViewModel @Inject constructor(val score: Score, val repository: Reposito
     val scoreLiveData: LiveData<Int> = _scoreLiveData
 
     fun loadHighScore() {
+        Log.i("MyTest", "highscore ${repository.loadHighScore()}")
+        score.highScore = repository.loadHighScore()
         _highScoreLiveData.value = repository.loadHighScore()
     }
 
@@ -36,5 +38,6 @@ class MyViewModel @Inject constructor(val score: Score, val repository: Reposito
     fun decreaseScore() {
         _scoreLiveData.value = score.decreaseScore()
     }
+
 
 }

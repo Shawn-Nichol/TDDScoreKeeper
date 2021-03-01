@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel2: MyViewModel
 
+    @Inject
+    lateinit var repository: Repository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Ask Dagger to Inject our dependencies
         (application as MyApplication).appComponent.inject(this)
@@ -33,5 +36,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onStop() {
+        super.onStop()
+        val saveScore: Int = viewModel.highScoreLiveData.value!!
 
+        Log.i("MyTest", "MainActivityOnStop() savescore: $saveScore")
+    }
 }

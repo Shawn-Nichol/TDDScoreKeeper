@@ -1,10 +1,7 @@
 package com.example.tddscorekeeper
 
-import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
-import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Assert
 import org.junit.Before

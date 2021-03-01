@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{`High Score: ` +  String.valueOf(viewModel.scoreLiveData)}"
+            android:text="@{`High Score: ` +  String.valueOf(viewModel.highScoreLiveData)}"
 
 
             app:layout_constraintEnd_toEndOf="parent"
