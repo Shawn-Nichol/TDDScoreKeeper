@@ -10,34 +10,31 @@ import javax.inject.Singleton
 @Singleton
 class MyViewModel @Inject constructor(val score: Score, val repository: Repository)  {
 
-    init {
-        Log.i("MyTest", "Should only run once.")
-
-    }
-
-
     var logScore = 0
-
 
     private val _highScoreLiveData = MutableLiveData<Int>()
     val highScoreLiveData: LiveData<Int> = _highScoreLiveData
 
+    init {
+        loadHighScore()
+    }
+
+
+
     private val _scoreLiveData = MutableLiveData<Int>()
     val scoreLiveData: LiveData<Int> = _scoreLiveData
 
-    fun highScore() {
+    fun loadHighScore() {
         _highScoreLiveData.value = repository.loadHighScore()
     }
 
     fun increaseScore() {
-        score.increaseScore()
-        _scoreLiveData.value = score.currentScore
-        _highScoreLiveData.value = score.highScore
+        _scoreLiveData.value = score.increaseScore()
+        _highScoreLiveData.value = score.checkHighScore()
     }
 
     fun decreaseScore() {
-        score.decreaseScore()
-        _scoreLiveData.value = score.currentScore
+        _scoreLiveData.value = score.decreaseScore()
     }
 
 }

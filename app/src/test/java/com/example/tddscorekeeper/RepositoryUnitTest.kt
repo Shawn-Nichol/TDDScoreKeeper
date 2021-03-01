@@ -22,6 +22,7 @@ class RepositoryUnitTest {
 
     @Before
     fun setup() {
+
         repository = Repository(storage)
     }
 
@@ -30,7 +31,14 @@ class RepositoryUnitTest {
         val score = 20
         repository.saveScore(20)
 
-        verify(storage.setInt(HIGHSCORE_KEY, score))
+        verify(storage).setInt(HIGHSCORE_KEY, score)
+    }
+
+    @Test
+    fun loadScore() {
+        repository.loadHighScore()
+
+        verify(storage).getInt(HIGHSCORE_KEY)
     }
 
 //    @Mock

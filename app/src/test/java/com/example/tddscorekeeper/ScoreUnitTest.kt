@@ -38,22 +38,32 @@ class ScoreUnitTest {
     }
 
     @Test
-    fun increaseScore_highScore() {
-        score.currentScore  = 9
+    fun checkHighScore_staysTheSame() {
+        // get objects
+        score.currentScore = 9
         score.highScore = 10
-        score.increaseScore()
 
-        Assert.assertEquals(score.highScore, score.currentScore)
+        // When: do action
+        score.checkHighScore()
+
+        // Then results
+        Assert.assertEquals(10, score.highScore)
+        Assert.assertNotEquals(10, score.currentScore)
     }
 
     @Test
-    fun increaseScore_NotHighScore() {
-        score.highScore
+    fun checkHigh_increase() {
+        // get objects
+        score.currentScore = 11
         score.highScore = 10
 
-        score.increaseScore()
+        // When do action
+        score.checkHighScore()
 
-        Assert.assertEquals(10, score.highScore)
+        // then results
+        Assert.assertEquals(11, score.highScore)
+        Assert.assertEquals(11, score.currentScore)
+
     }
 
     @Test
