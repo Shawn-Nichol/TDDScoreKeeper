@@ -37,6 +37,14 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        liveDataObserver()
+
         return binding.root
+    }
+
+    fun liveDataObserver() {
+        viewModel.scoreLiveData.observe(viewLifecycleOwner, {
+            Log.i("Practice", "New score is $it")
+        } )
     }
 }

@@ -2,14 +2,21 @@ package com.example.tddscorekeeper
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+
 import com.example.tddscorekeeper.main.MyViewModel
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Assert
+
+
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -18,11 +25,10 @@ class ViewModelUnitTest {
     @get:Rule
     val taskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: MyViewModel
+    lateinit var viewModel: MyViewModel
 
     @Mock
     private lateinit var score: Score
-
     @Mock
     private lateinit var repository: Repository
 
@@ -35,6 +41,8 @@ class ViewModelUnitTest {
 
     @Before
     fun setup() {
+        score = mock(Score::class.java)
+        repository = mock(Repository::class.java)
 
         viewModel = MyViewModel(score, repository)
 

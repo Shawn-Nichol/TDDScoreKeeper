@@ -25,6 +25,6 @@ class ScorePreferenceStorageUnitTest {
 
     @Test
     fun setInt() {
-        verify(sharedPre)
+
     }
 }
