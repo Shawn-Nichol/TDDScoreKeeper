@@ -2,6 +2,7 @@ package com.example.tddscorekeeper
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.example.tddscorekeeper.main.MyViewModel
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Assert
 import org.junit.Before

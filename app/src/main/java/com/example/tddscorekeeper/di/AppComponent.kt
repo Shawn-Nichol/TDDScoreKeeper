@@ -1,9 +1,8 @@
 package com.example.tddscorekeeper.di
 
 import android.content.Context
-import com.example.tddscorekeeper.MainActivity
-import com.example.tddscorekeeper.ScoreKeeperFragment
-import com.example.tddscorekeeper.databinding.FragmentScoreKeeperBinding
+import com.example.tddscorekeeper.main.MainActivity
+import com.example.tddscorekeeper.main.fragment.ScoreKeeperFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

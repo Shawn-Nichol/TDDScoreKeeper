@@ -6,16 +6,16 @@
     <data>
         <variable
             name="binding"
-            type="com.example.tddscorekeeper.ScoreKeeperFragment" />
+            type="com.example.tddscorekeeper.main.fragment.ScoreKeeperFragment" />
         <variable
             name="viewModel"
-            type="com.example.tddscorekeeper.MyViewModel" />
+            type="com.example.tddscorekeeper.main.MyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ScoreKeeperFragment">
+        tools:context=".main.fragment.ScoreKeeperFragment">
 
         <Button
             android:id="@+id/btn_plus"

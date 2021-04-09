@@ -7,7 +7,7 @@ import com.example.tddscorekeeper.storage.Storage
 import javax.inject.Inject
 
 
-class Repository @Inject constructor(val storage: Storage) {
+class Repository @Inject constructor(private val storage: Storage) {
 
     fun saveScore(highScore: Int) {
         storage.setInt(HIGHSCORE_KEY, highScore)
