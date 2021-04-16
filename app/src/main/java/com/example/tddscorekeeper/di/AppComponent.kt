@@ -2,7 +2,7 @@ package com.example.tddscorekeeper.di
 
 import android.content.Context
 import com.example.tddscorekeeper.main.MainActivity
-import com.example.tddscorekeeper.main.fragment.ScoreKeeperFragment
+import com.example.tddscorekeeper.main.fragment.MyFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -20,6 +20,6 @@ interface AppComponent {
 
     // Classes that can be injected by this component
     fun inject(activity: MainActivity)
-    fun inject(fragment: ScoreKeeperFragment)
+    fun inject(fragment: MyFragment)
 
 }

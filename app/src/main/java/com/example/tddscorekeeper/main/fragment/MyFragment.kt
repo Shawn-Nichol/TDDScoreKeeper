@@ -15,7 +15,7 @@ import com.example.tddscorekeeper.main.MyViewModel
 import javax.inject.Inject
 
 
-class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
+class MyFragment(private val viewModel: MyViewModel) : Fragment() {
 
 
     private lateinit var binding: FragmentScoreKeeperBinding
@@ -37,9 +37,14 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        liveDataObserver()
+
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        liveDataObserver()
     }
 
     fun liveDataObserver() {

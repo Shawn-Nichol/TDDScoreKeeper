@@ -38,4 +38,7 @@ class MyViewModel @Inject constructor(val score: Score, val repository: Reposito
         _scoreLiveData.value = score.decreaseScore()
     }
 
+
+
 }
+

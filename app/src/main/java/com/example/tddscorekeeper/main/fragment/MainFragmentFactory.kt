@@ -7,8 +7,8 @@ import com.example.tddscorekeeper.main.MyViewModel
 class MainFragmentFactory(private val viewModel: MyViewModel) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when(className) {
-            ScoreKeeperFragment::class.java.name -> {
-                ScoreKeeperFragment(viewModel)
+            MyFragment::class.java.name -> {
+                MyFragment(viewModel)
             } else -> super.instantiate(classLoader, className)
         }
     }
