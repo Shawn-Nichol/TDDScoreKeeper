@@ -1,20 +1,35 @@
 package com.example.tddscorekeeper.main.fragment
 
+
+
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.MutableLiveData
+import androidx.test.espresso.Espresso.onView
+
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.tddscorekeeper.R
 import com.example.tddscorekeeper.main.MyViewModel
-import kotlinx.coroutines.test.runBlockingTest
+import org.hamcrest.core.IsNot.not
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
+
+
+
+import org.mockito.Mockito.*
+
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.LooperMode
-import org.robolectric.shadows.ShadowLooper
+
+
 
 @RunWith(RobolectricTestRunner::class)
 @LooperMode(LooperMode.Mode.PAUSED)
@@ -24,24 +39,15 @@ class MyFragmentTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-
-
     private lateinit var scenario: FragmentScenario<MyFragment>
-
-
 
     @Before
     fun setup() {
+        val myLiveData: MutableLiveData<Int> = MutableLiveData(0)
 
-
-    }
-
-    @Test
-    fun testOne() = runBlockingTest {
-        ShadowLooper.runMainLooperToNextTask()
         val viewModel: MyViewModel = mock(MyViewModel::class.java)
 
-
+        `when`(viewModel.scoreLiveData).thenReturn(myLiveData)
 
         scenario = launchFragmentInContainer(
             factory = MainFragmentFactory(viewModel),
@@ -50,28 +56,59 @@ class MyFragmentTest {
             initialState = Lifecycle.State.RESUMED
         )
 
+        scenario.apply {
 
-//        scenario.moveToState(Lifecycle.State.RESUMED)
-
-//        shadowOf(Looper.getMainLooper()).idle()
-//        scenario.recreate() // Simulates if the phone ran low on resources and the app had to be recreated.
+        }
 
     }
 
     @Test
-    fun testTwo() {
-        val viewModel: MyViewModel = mock(MyViewModel::class.java)
+    fun `Button Minus Properties`() {
+        val btnMinus = onView(withId(R.id.btn_minus))
 
-
-
-        scenario = launchFragmentInContainer {
-            MyFragment(viewModel).also {
-
-                it.liveDataObserver()
-            }
-        }
+        btnMinus
+            .check(ViewAssertions.matches(isDisplayed()))
+            .check(ViewAssertions.matches(isClickable()))
+            .perform(ViewActions.click())
     }
+
+    @Test
+    fun `Button Plus properties`() {
+        val btnPlus = onView(withId(R.id.btn_plus))
+
+        btnPlus
+            .check(ViewAssertions.matches(isDisplayed()))
+            .perform(ViewActions.click())
+
+    }
+
+    @Test
+    fun `EditText Score properties`() {
+        val score = R.id.tv_score
+
+
+
+        val tvScore = onView(withId(score))
+
+
+
+        tvScore
+            .check(ViewAssertions.matches(isDisplayed()))
+           .check(ViewAssertions.matches(not(isClickable())))
+
+//        onView(withId(score)).check(ViewAssertion.matches(withText("This is a test.")));
+
+    }
+
+    @Test
+    fun `EditText HighScore properties`() {
+        val highScore = onView(ViewMatchers.withId(R.id.tv_highScore))
+
+        highScore
+            .check(ViewAssertions.matches(isDisplayed()))
+            .check(ViewAssertions.matches(not(isClickable())))
+    }
+
+
 }
 
-// FragmentScenario doesn't appear to be the problem,
-// This is either a problem with robolectric or the test scope.

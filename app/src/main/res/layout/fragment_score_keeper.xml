@@ -24,12 +24,12 @@
             android:text="PLUS"
             android:onClick="@{() -> viewModel.increaseScore()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/btn_minus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MINUS"
@@ -40,11 +40,13 @@
             app:layout_constraintTop_toTopOf="@+id/btn_plus" />
 
         <TextView
+            android:id="@+id/tv_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@{String.valueOf(viewModel.scoreLiveData)}"
             android:textSize="72sp"
+            android:clickable="false"
             app:layout_constraintBottom_toTopOf="@+id/btn_plus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -56,8 +58,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@{`High Score: ` +  String.valueOf(viewModel.highScoreLiveData)}"
-
-
+            android:clickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="99" />
