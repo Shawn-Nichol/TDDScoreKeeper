@@ -1,10 +1,11 @@
 package com.example.tddscorekeeper.main.fragment
 
 
+import android.content.Context
 import android.view.View
 import android.widget.TextView
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
@@ -12,7 +13,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
-
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -26,11 +26,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
-
 import org.mockito.Mockito.*
-
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.LooperMode
 
 
@@ -44,11 +42,13 @@ class MyFragmentTest {
 
     private lateinit var scenario: FragmentScenario<ScoreKeeperFragment>
 
+    private lateinit var viewModel: MyViewModel
+
     @Before
     fun setup() {
         val myLiveData: MutableLiveData<Int> = MutableLiveData(0)
 
-        val viewModel: MyViewModel = mock(MyViewModel::class.java)
+        viewModel = mock(MyViewModel::class.java)
 
         `when`(viewModel.scoreLiveData).thenReturn(myLiveData)
 
@@ -58,11 +58,6 @@ class MyFragmentTest {
             themeResId = R.style.Theme_TDDScoreKeeper,
             initialState = Lifecycle.State.RESUMED
         )
-
-        scenario.apply {
-
-        }
-
     }
 
     @Test
@@ -76,6 +71,15 @@ class MyFragmentTest {
     }
 
     @Test
+    fun `Button Minus clicked`() {
+        val btnMinus = onView(withId(R.id.btn_minus))
+
+        btnMinus.perform(ViewActions.click())
+
+        verify(viewModel, times(1)).decreaseScore()
+    }
+
+    @Test
     fun `Button Plus properties`() {
         val btnPlus = onView(withId(R.id.btn_plus))
 
@@ -83,6 +87,14 @@ class MyFragmentTest {
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
 
+    }
+
+    @Test
+    fun `Button Plus clicked`() {
+        val btnPlus = onView(withId(R.id.btn_plus))
+        btnPlus.perform(ViewActions.click())
+
+        verify(viewModel, times(1)).increaseScore()
     }
 
     @Test
@@ -115,12 +127,14 @@ class MyFragmentTest {
             .check(ViewAssertions.matches(withText("7")))
     }
 
-
     fun setTextInTextView(value: String): ViewAction {
         return object : ViewAction {
             override fun getConstraints(): Matcher<View> {
-                return CoreMatchers.allOf(ViewMatchers.isDisplayed(), ViewMatchers.isAssignableFrom(
-                    TextView::class.java))
+                return CoreMatchers.allOf(
+                    ViewMatchers.isDisplayed(), ViewMatchers.isAssignableFrom(
+                        TextView::class.java
+                    )
+                )
             }
 
             override fun perform(uiController: UiController, view: View) {
