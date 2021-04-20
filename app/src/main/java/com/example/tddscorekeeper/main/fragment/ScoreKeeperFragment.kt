@@ -15,7 +15,7 @@ import com.example.tddscorekeeper.main.MyViewModel
 import javax.inject.Inject
 
 
-class MyFragment(private val viewModel: MyViewModel) : Fragment() {
+class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
 
 
     private lateinit var binding: FragmentScoreKeeperBinding

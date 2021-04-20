@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/scoreKeeperFragment"
-        android:name="com.example.tddscorekeeper.main.fragment.MyFragment"
+        android:name="com.example.tddscorekeeper.main.fragment.ScoreKeeperFragment"
         android:label="fragment_score_keeper"
         tools:layout="@layout/fragment_score_keeper" />
 </navigation>
