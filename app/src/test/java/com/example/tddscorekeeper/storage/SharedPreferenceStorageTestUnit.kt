@@ -1,4 +1,4 @@
-package com.example.tddscorekeeper
+package com.example.tddscorekeeper.storage
 
 import android.content.Context
 import com.example.tddscorekeeper.storage.SharedPreferenceStorage
@@ -20,7 +20,7 @@ class ScorePreferenceStorageUnitTest {
 
     @Before
     fun setup() {
-            sharedPre = SharedPreferenceStorage(context)
+        sharedPre = SharedPreferenceStorage(context)
     }
 
     @Test

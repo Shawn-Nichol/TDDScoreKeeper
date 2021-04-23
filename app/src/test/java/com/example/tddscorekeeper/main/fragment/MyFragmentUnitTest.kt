@@ -1,11 +1,10 @@
 package com.example.tddscorekeeper.main.fragment
 
 
-import android.content.Context
 import android.view.View
 import android.widget.TextView
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.fragment.app.FragmentManager
+
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
@@ -22,6 +21,7 @@ import com.example.tddscorekeeper.main.MyViewModel
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 import org.hamcrest.core.IsNot.not
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,7 +34,7 @@ import org.robolectric.annotation.LooperMode
 
 @RunWith(RobolectricTestRunner::class)
 @LooperMode(LooperMode.Mode.PAUSED)
-class MyFragmentTest {
+class MyFragmentUnitTest {
 
     // Executes tasks in the Architecture Components in the same thread
     @get:Rule
@@ -59,6 +59,8 @@ class MyFragmentTest {
             initialState = Lifecycle.State.RESUMED
         )
     }
+
+
 
     @Test
     fun `Button Minus Properties`() {
@@ -110,9 +112,6 @@ class MyFragmentTest {
             .check(ViewAssertions.matches(isDisplayed()))
             .check(ViewAssertions.matches(not(isClickable())))
             .check(ViewAssertions.matches(withText("0")))
-
-//        onView(withId(score)).check(ViewAssertion.matches(withText("This is a test.")));
-
     }
 
     @Test
