@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var repository: Repository
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
 
         // Ask Dagger to Inject our dependencies
         (application as MyApplication).appComponent.inject(this)
