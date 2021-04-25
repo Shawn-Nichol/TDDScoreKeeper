@@ -110,9 +110,6 @@ class MyFragmentTest {
             .check(ViewAssertions.matches(isDisplayed()))
             .check(ViewAssertions.matches(not(isClickable())))
             .check(ViewAssertions.matches(withText("0")))
-
-//        onView(withId(score)).check(ViewAssertion.matches(withText("This is a test.")));
-
     }
 
     @Test
