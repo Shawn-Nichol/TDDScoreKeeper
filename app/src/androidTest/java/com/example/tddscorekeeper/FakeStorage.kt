@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class FakeStorage @Inject constructor() : Storage{
 
-    var highScore = 10
+    var highScore = 5
 
     override fun setInt(key: String, value: Int) {
         highScore = value
