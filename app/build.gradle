@@ -15,7 +15,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.example.tddscorekeeper.dagger.MyCustomTestRunner"
-//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -30,6 +29,18 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    android {
+        sourceSets {
+            String sharedTestDir = 'src/sharedTest/java'
+            test {
+                java.srcDirs += sharedTestDir
+            }
+            androidTest {
+                java.srcDirs += sharedTestDir
+            }
+        }
     }
 
     // Enables data binding.
