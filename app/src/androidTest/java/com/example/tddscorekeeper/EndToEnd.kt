@@ -27,8 +27,13 @@ class EndToEnd {
 
     @After
     fun close() {
-        scenario.
-        scenario.close()
+
+        scenario
+            .onActivity {
+                it.viewModel.resetHighScore(5)
+                it.viewModel.resetScore()
+            }
+            .close()
     }
 
     @Test
@@ -61,7 +66,6 @@ class EndToEnd {
     @Test
     fun minScoreZero() {
         var btnPresses = 3
-
         multiplePlusButtonPresses(btnPresses)
 
         while (btnPresses > -2) {
@@ -77,11 +81,10 @@ class EndToEnd {
 
     }
 
-
-    private fun multiplePlusButtonPresses( btnPresses: Int) {
+    private fun multiplePlusButtonPresses(btnPresses: Int) {
         var pressCounter = 0
 
-        while(pressCounter < btnPresses) {
+        while (pressCounter < btnPresses) {
             onView(withId(R.id.btn_plus)).perform(click())
             pressCounter++
             onView(withId(R.id.tv_score)).check(matches(withText(pressCounter.toString())))

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tddscorekeeper.Repository
 import com.example.tddscorekeeper.Score
+import org.jetbrains.annotations.TestOnly
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -38,7 +39,17 @@ class MyViewModel @Inject constructor(val score: Score, val repository: Reposito
         _scoreLiveData.value = score.decreaseScore()
     }
 
+    @TestOnly
+    fun resetHighScore(highScore: Int) {
+        _highScoreLiveData.value = highScore
+        repository.saveScore(highScore)
+    }
 
+    @TestOnly
+    fun resetScore() {
+        score.currentScore = 0
+        _scoreLiveData.value = 0
+    }
 
 }
 
