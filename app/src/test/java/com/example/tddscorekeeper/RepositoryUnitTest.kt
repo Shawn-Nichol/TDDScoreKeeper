@@ -2,11 +2,11 @@ package com.example.tddscorekeeper
 
 import com.example.tddscorekeeper.storage.HIGHSCORE_KEY
 import com.example.tddscorekeeper.storage.Storage
-import com.nhaarman.mockitokotlin2.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)

@@ -4,15 +4,13 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.tddscorekeeper.Repository
 import com.example.tddscorekeeper.Score
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.inOrder
-import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -58,16 +56,17 @@ class ViewModelUnitTest {
 
         // Then results
         verify(currentScoreObserver).onChanged(any())
-        inOrder(score) {
-            verify(score).increaseScore()
-            verify(score).checkHighScore()
-        }
+
+       inOrder(score)
+           verify(score).increaseScore()
+           verify(score).checkHighScore()
+
     }
 
     @Test
     fun increaseScore_ToOne() {
         // Given: setup
-        whenever(score.increaseScore()).thenReturn(1)
+        `when`(score.increaseScore()).thenReturn(1)
         // When: do action
         viewModel.increaseScore()
         // Then results
@@ -78,14 +77,14 @@ class ViewModelUnitTest {
     @Test
     fun increaseScore_LiveData() {
         // Given Setup
-        whenever(score.increaseScore()).thenReturn(1)
+        `when`(score.increaseScore()).thenReturn(1)
 
 
         // When: Do action
         viewModel.increaseScore()
-        whenever(score.increaseScore()).thenReturn(2)
+        `when`(score.increaseScore()).thenReturn(2)
         viewModel.increaseScore()
-        whenever(score.increaseScore()).thenReturn(3)
+        `when`(score.increaseScore()).thenReturn(3)
         viewModel.increaseScore()
 
         // Then result.
@@ -98,7 +97,7 @@ class ViewModelUnitTest {
     @Test
     fun loadHighScore() {
         // Given: Setup
-        whenever(repository.loadHighScore()).thenReturn(10)
+        `when`(repository.loadHighScore()).thenReturn(10)
         // When do action
         viewModel.loadHighScore()
 
@@ -111,9 +110,9 @@ class ViewModelUnitTest {
     @Test
     fun highScore_inCrease() {
         // Given
-        whenever(repository.loadHighScore()).thenReturn(10)
-        whenever(score.increaseScore()).thenReturn(11)
-        whenever(score.checkHighScore()).thenReturn(11)
+        `when`(repository.loadHighScore()).thenReturn(10)
+        `when`(score.increaseScore()).thenReturn(11)
+        `when`(score.checkHighScore()).thenReturn(11)
         // When
         viewModel.loadHighScore()
         viewModel.increaseScore()
@@ -128,9 +127,9 @@ class ViewModelUnitTest {
     fun decreaseScore_functionCall() {
         viewModel.decreaseScore()
 
-        inOrder(score) {
+        inOrder(score)
             verify(score).decreaseScore()
-        }
+
     }
 
     @Test
@@ -145,7 +144,7 @@ class ViewModelUnitTest {
     @Test
     fun decreaseScore() {
         viewModel.score.currentScore = 8
-        whenever(score.decreaseScore()).thenReturn(7)
+        `when`(score.decreaseScore()).thenReturn(7)
         // When: do action
 
         viewModel.decreaseScore()
@@ -153,6 +152,5 @@ class ViewModelUnitTest {
         // Then results
         Assert.assertEquals(7, viewModel.scoreLiveData.value)
     }
-
 
 }

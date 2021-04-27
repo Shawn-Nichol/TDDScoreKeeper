@@ -1,4 +1,4 @@
-package com.example.tddscorekeeper.testutils
+package testutils
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
