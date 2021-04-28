@@ -139,6 +139,7 @@ class ViewModelUnitTest {
 
         // Then results
         Assert.assertEquals(0, viewModel.scoreLiveData.value)
+
     }
 
     @Test
@@ -151,6 +152,21 @@ class ViewModelUnitTest {
 
         // Then results
         Assert.assertEquals(7, viewModel.scoreLiveData.value)
+    }
+
+    @Test
+    fun `Rest score`() {
+        viewModel.resetScore()
+
+        verify(score).currentScore = 0
+        Assert.assertEquals(viewModel.scoreLiveData.value, 0)
+    }
+
+    @Test
+    fun `Reset high score`() {
+        viewModel.resetHighScore(0)
+        verify(repository).saveScore(0)
+        Assert.assertEquals(viewModel.highScoreLiveData.value, 0)
     }
 
 }

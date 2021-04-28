@@ -2,4 +2,6 @@
     <string name="app_name">TDDScoreKeeper</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reset_high_score">Reset HighScore</string>
+    <string name="reset_score">Reset score</string>
 </resources>

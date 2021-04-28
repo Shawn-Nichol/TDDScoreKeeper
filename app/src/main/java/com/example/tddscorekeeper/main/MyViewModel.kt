@@ -39,13 +39,11 @@ class MyViewModel @Inject constructor(val score: Score, val repository: Reposito
         _scoreLiveData.value = score.decreaseScore()
     }
 
-    @TestOnly
     fun resetHighScore(highScore: Int) {
         _highScoreLiveData.value = highScore
         repository.saveScore(highScore)
     }
 
-    @TestOnly
     fun resetScore() {
         score.currentScore = 0
         _scoreLiveData.value = 0

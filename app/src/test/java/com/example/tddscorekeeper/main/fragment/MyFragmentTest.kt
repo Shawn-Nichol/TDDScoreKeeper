@@ -1,5 +1,6 @@
 package com.example.tddscorekeeper.main.fragment
 
+import android.app.Application
 import android.view.View
 import android.widget.TextView
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -7,9 +8,13 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
+import androidx.test.InstrumentationRegistry
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
+import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -23,6 +28,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mockito.*
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
@@ -83,7 +89,6 @@ class MyFragmentTest {
         btnPlus
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
-
     }
 
     @Test
@@ -120,6 +125,28 @@ class MyFragmentTest {
             .check(ViewAssertions.matches(not(isClickable())))
             .check(ViewAssertions.matches(withText("7")))
     }
+
+    @Test
+    fun `menu reset score`() {
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+        // Menu items need to reference the view with a string, ID doesn't work.
+        onView(withText(R.string.reset_score))
+            .check(ViewAssertions.matches(isDisplayed()))
+            .perform(ViewActions.click())
+
+        verify(viewModel).resetScore()
+    }
+
+    @Test
+    fun `menu reset high score`() {
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+        onView(withText(R.string.reset_high_score))
+            .check(ViewAssertions.matches(isDisplayed()))
+            .perform(ViewActions.click())
+
+        verify(viewModel).resetHighScore(0)
+    }
+
 
     fun setTextInTextView(value: String): ViewAction {
         return object : ViewAction {

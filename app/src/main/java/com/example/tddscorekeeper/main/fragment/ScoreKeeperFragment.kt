@@ -2,28 +2,23 @@
 package com.example.tddscorekeeper.main.fragment
 
 import android.os.Bundle
-import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.tddscorekeeper.R
 import com.example.tddscorekeeper.databinding.FragmentScoreKeeperBinding
 import com.example.tddscorekeeper.di.MyApplication
 import com.example.tddscorekeeper.main.MyViewModel
-import javax.inject.Inject
 
 
 class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
 
-
     private lateinit var binding: FragmentScoreKeeperBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (requireActivity().application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -33,23 +28,29 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score_keeper, container, false )
 
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-
 
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        liveDataObserver()
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.my_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
-    fun liveDataObserver() {
-        viewModel.scoreLiveData.observe(viewLifecycleOwner, {
-            Log.i("Practice", "New score is $it")
-        } )
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.menu_reset_score -> {
+                viewModel.resetScore()
+                true
+            }
+            R.id.menu_reset_high_score -> {
+                viewModel.resetHighScore(0)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

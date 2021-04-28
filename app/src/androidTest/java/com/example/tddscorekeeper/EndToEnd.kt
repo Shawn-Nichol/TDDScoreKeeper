@@ -2,7 +2,9 @@ package com.example.tddscorekeeper
 
 
 import androidx.test.core.app.ActivityScenario
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -79,6 +81,28 @@ class EndToEnd {
             }
         }
 
+    }
+
+    @Test
+    fun resetScore() {
+        val btnPresses = 3
+        multiplePlusButtonPresses(btnPresses)
+
+        onView(withId(R.id.tv_score)).check(matches(withText("3")))
+
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+
+        onView(withText(R.string.reset_score)).perform(click())
+
+        onView(withId(R.id.tv_score)).check(matches(withText("0")))
+
+    }
+
+    @Test
+    fun resetHighScore() {
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+        onView(withText(R.string.reset_high_score)).perform(click())
+        onView(withId(R.id.tv_highScore)).check(matches(withText("High Score: 0")))
     }
 
     private fun multiplePlusButtonPresses(btnPresses: Int) {
