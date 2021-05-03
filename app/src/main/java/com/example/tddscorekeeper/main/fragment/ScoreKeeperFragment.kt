@@ -5,10 +5,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import com.example.tddscorekeeper.R
 import com.example.tddscorekeeper.databinding.FragmentScoreKeeperBinding
 import com.example.tddscorekeeper.di.MyApplication
 import com.example.tddscorekeeper.main.MyViewModel
+import com.example.tddscorekeeper.main.fragment.dialog.ResetScoreDialog
+import com.google.android.material.snackbar.Snackbar
 
 
 class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
@@ -17,6 +22,7 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (requireActivity().application as MyApplication).appComponent.inject(this)
+        requireActivity().supportFragmentManager.fragmentFactory = MainFragmentFactory(viewModel)
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
@@ -40,9 +46,13 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         return when(item.itemId) {
             R.id.menu_reset_score -> {
-                viewModel.resetScore()
+                findNavController().navigate(R.id.action_scoreKeeperFragment_to_resetScoreDialog)
+
+//
+//                restDialog.show(requireActivity().supportFragmentManager, "ResetScoreDialog")
                 true
             }
             R.id.menu_reset_high_score -> {
@@ -53,4 +63,6 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 }

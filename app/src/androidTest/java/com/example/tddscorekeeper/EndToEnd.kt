@@ -46,7 +46,7 @@ class EndToEnd {
 
     @Test
     fun loadFragment() {
-        onView(withId(R.id.scoreKeeperFragment))
+        onView(withId(R.id.dest_scoreKeeperFragment))
     }
 
     @Test
