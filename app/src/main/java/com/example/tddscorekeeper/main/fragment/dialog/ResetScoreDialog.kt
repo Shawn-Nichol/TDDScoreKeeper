@@ -18,7 +18,7 @@ class ResetScoreDialog (val viewModel: MyViewModel) : DialogFragment() {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
             builder.setMessage("Do you want to reset the score.")
-                .setPositiveButton("Confirm",
+                .setPositiveButton(getString(R.string.confirm),
                     DialogInterface.OnClickListener { dialog, id ->
                         viewModel.resetScore()
                     })
