@@ -8,8 +8,6 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.test.InstrumentationRegistry
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
@@ -48,8 +46,6 @@ class MyFragmentTest {
     private lateinit var scenario: FragmentScenario<ScoreKeeperFragment>
 
     private lateinit var viewModel: MyViewModel
-
-    val mockNavController = mock(NavController::class.java)
 
     @Before
     fun setup() {
@@ -132,17 +128,13 @@ class MyFragmentTest {
 
     @Test
     fun `menu reset score`() {
-        scenario.onFragment { fragment ->
-            Navigation.setViewNavController(fragment.requireView(), mockNavController)
-        }
-
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
         // Menu items need to reference the view with a string, ID doesn't work.
         onView(withText(R.string.reset_score))
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
 
-        verify(mockNavController).navigate(R.id.action_scoreKeeperFragment_to_resetScoreDialog)
+        verify(viewModel).resetScore()
     }
 
     @Test
