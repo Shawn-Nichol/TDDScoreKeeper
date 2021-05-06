@@ -1,20 +1,20 @@
 package com.example.tddscorekeeper.main.fragment
 
-import android.app.Application
 import android.view.View
 import android.widget.TextView
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
-import androidx.test.InstrumentationRegistry
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
-import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -46,6 +46,8 @@ class MyFragmentTest {
     private lateinit var scenario: FragmentScenario<ScoreKeeperFragment>
 
     private lateinit var viewModel: MyViewModel
+
+    private val mockNavController = mock(NavController::class.java)
 
     @Before
     fun setup() {
@@ -128,13 +130,18 @@ class MyFragmentTest {
 
     @Test
     fun `menu reset score`() {
+
+        scenario.onFragment{ fragment ->
+            Navigation.setViewNavController(fragment.requireView(), mockNavController)
+        }
+
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
         // Menu items need to reference the view with a string, ID doesn't work.
         onView(withText(R.string.reset_score))
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
 
-        verify(viewModel).resetScore()
+        verify(mockNavController).navigate(R.id.action_scoreKeeperFragment_to_resetScoreDialog)
     }
 
     @Test
@@ -148,7 +155,7 @@ class MyFragmentTest {
     }
 
 
-    fun setTextInTextView(value: String): ViewAction {
+    private fun setTextInTextView(value: String): ViewAction {
         return object : ViewAction {
             override fun getConstraints(): Matcher<View> {
                 return CoreMatchers.allOf(
