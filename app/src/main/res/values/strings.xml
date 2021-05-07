@@ -7,4 +7,5 @@
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="resetscore_dialog_message">Do you want to reset the score.</string>
+    <string name="snackbar_score">Score stays the same</string>
 </resources>

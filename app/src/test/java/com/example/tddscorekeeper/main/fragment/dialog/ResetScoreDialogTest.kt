@@ -35,18 +35,12 @@ class ResetScoreDialogTest {
 
     }
 
-    @After
-    fun close() {
-
-    }
-
     @Test
     fun `Message`() {
         onView(withText(R.string.resetscore_dialog_message))
             .inRoot(isDialog())
             .check(matches(isDisplayed()))
     }
-
 
     @Test
     fun `Positive Button`() {
@@ -63,6 +57,8 @@ class ResetScoreDialogTest {
         onView(allOf(withId(android.R.id.button2), withText(R.string.cancel)))
             .inRoot(isDialog())
             .check(matches(isDisplayed()))
-            .perform(ViewActions.click())
+            .check(matches(isClickable()))
+
+        // Click action not preformed because it launches a snackbar that is launched in different fragment.
     }
 }

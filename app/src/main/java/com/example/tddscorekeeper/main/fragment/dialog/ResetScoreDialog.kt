@@ -15,8 +15,10 @@ import javax.inject.Inject
 class ResetScoreDialog (val viewModel: MyViewModel) : DialogFragment() {
 
 
+    lateinit var mContext: Context
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        mContext = context
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -30,8 +32,9 @@ class ResetScoreDialog (val viewModel: MyViewModel) : DialogFragment() {
                     })
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
-//                        Snackbar.make(requireActivity().findViewById(R.id.scoreKeeperFragment), "Score stays the same", 2000)
-//                            .show()
+                        Snackbar.make(requireActivity().findViewById(R.id.scoreKeeperFragment), getString(
+                                                    R.string.snackbar_score), 2000)
+                            .show()
                     })
             // Create the AlertDialog object and return it
             builder.create()
