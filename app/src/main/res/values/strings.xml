@@ -5,4 +5,6 @@
     <string name="reset_high_score">Reset HighScore</string>
     <string name="reset_score">Reset score</string>
     <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="resetscore_dialog_message">Do you want to reset the score.</string>
 </resources>

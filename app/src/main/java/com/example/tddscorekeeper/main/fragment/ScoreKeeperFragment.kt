@@ -50,9 +50,6 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
         return when(item.itemId) {
             R.id.menu_reset_score -> {
                 findNavController().navigate(R.id.action_scoreKeeperFragment_to_resetScoreDialog)
-
-//
-//                restDialog.show(requireActivity().supportFragmentManager, "ResetScoreDialog")
                 true
             }
             R.id.menu_reset_high_score -> {
@@ -63,6 +60,8 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 
 
 }
