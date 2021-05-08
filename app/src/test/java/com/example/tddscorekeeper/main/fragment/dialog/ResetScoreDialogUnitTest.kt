@@ -33,7 +33,7 @@ class ResetScoreDialogUnitTest {
     }
 
     @Test
-    fun `Message`() {
+    fun message() {
         onView(withText(R.string.message_reset_score))
             .inRoot(isDialog())
             .check(matches(isDisplayed()))

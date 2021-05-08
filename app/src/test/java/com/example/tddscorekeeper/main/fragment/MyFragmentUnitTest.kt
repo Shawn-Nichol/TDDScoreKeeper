@@ -24,6 +24,7 @@ import com.example.tddscorekeeper.main.MainViewModel
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 import org.hamcrest.core.IsNot.not
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,7 +35,6 @@ import org.robolectric.annotation.LooperMode
 
 
 @RunWith(RobolectricTestRunner::class)
-@LooperMode(LooperMode.Mode.PAUSED)
 class MyFragmentUnitTest {
 
     // Executes tasks in the Architecture Components in the same thread
@@ -43,17 +43,13 @@ class MyFragmentUnitTest {
 
     private lateinit var scenario: FragmentScenario<ScoreKeeperFragment>
 
-    private lateinit var viewModel: MainViewModel
+    private var viewModel: MainViewModel = mock(MainViewModel::class.java)
 
     private val mockNavController = mock(NavController::class.java)
 
+
     @Before
     fun setup() {
-        val myLiveData: MutableLiveData<Int> = MutableLiveData(0)
-
-        viewModel = mock(MainViewModel::class.java)
-
-        `when`(viewModel.scoreLiveData).thenReturn(myLiveData)
 
         scenario = launchFragmentInContainer(
             factory = MainFragmentFactory(viewModel),
@@ -61,13 +57,17 @@ class MyFragmentUnitTest {
             themeResId = R.style.Theme_TDDScoreKeeper,
             initialState = Lifecycle.State.RESUMED
         )
+
+    }
+
+    @After
+    fun close() {
+
     }
 
     @Test
     fun `Button Minus Properties`() {
-        val btnMinus = onView(withId(R.id.btn_minus))
-
-        btnMinus
+        onView(withId(R.id.btn_minus))
             .check(ViewAssertions.matches(isDisplayed()))
             .check(ViewAssertions.matches(isClickable()))
             .perform(ViewActions.click())
@@ -75,71 +75,58 @@ class MyFragmentUnitTest {
 
     @Test
     fun `Button Minus clicked`() {
-        val btnMinus = onView(withId(R.id.btn_minus))
-
-        btnMinus.perform(ViewActions.click())
+        onView(withId(R.id.btn_minus))
+            .perform(ViewActions.click())
 
         verify(viewModel, times(1)).decreaseScore()
     }
 
     @Test
     fun `Button Plus properties`() {
-        val btnPlus = onView(withId(R.id.btn_plus))
-
-        btnPlus
+        onView(withId(R.id.btn_plus))
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
     }
 
     @Test
     fun `Button Plus clicked`() {
-        val btnPlus = onView(withId(R.id.btn_plus))
-        btnPlus.perform(ViewActions.click())
+        onView(withId(R.id.btn_plus))
+            .perform(ViewActions.click())
 
         verify(viewModel, times(1)).increaseScore()
+
     }
 
     @Test
     fun `TextView Score properties`() {
-        val score = R.id.tv_score
-
-
-        val tvScore = onView(withId(score))
-
-        tvScore.perform(setTextInTextView("0"))
-
-        tvScore
+        onView(withId(R.id.tv_score))
             .check(ViewAssertions.matches(isDisplayed()))
             .check(ViewAssertions.matches(not(isClickable())))
-            .check(ViewAssertions.matches(withText("0")))
     }
 
     @Test
     fun `TextView HighScore properties`() {
-        val highScore = onView(ViewMatchers.withId(R.id.tv_highScore))
-
-        highScore.perform(setTextInTextView("7"))
-
-        highScore
+        onView(withId(R.id.tv_highScore))
             .check(ViewAssertions.matches(isDisplayed()))
             .check(ViewAssertions.matches(not(isClickable())))
-            .check(ViewAssertions.matches(withText("7")))
     }
 
     @Test
     fun `menu reset score`() {
-
         scenario.onFragment{ fragment ->
             Navigation.setViewNavController(fragment.requireView(), mockNavController)
         }
 
+        // Open menu.
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+
         // Menu items need to reference the view with a string, ID doesn't work.
         onView(withText(R.string.menu_reset_score))
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
 
         verify(mockNavController).navigate(R.id.action_scoreKeeperFragment_to_resetScoreDialog)
+
     }
 
     @Test
@@ -147,34 +134,15 @@ class MyFragmentUnitTest {
         scenario.onFragment { fragment ->
             Navigation.setViewNavController(fragment.requireView(), mockNavController)
         }
+
+        // Open menu
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+
         onView(withText(R.string.menu_reset_high_score))
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
 
         verify(mockNavController).navigate(R.id.action_dest_scoreKeeperFragment_to_resetHighScoreDialog)
     }
-
-
-    private fun setTextInTextView(value: String): ViewAction {
-        return object : ViewAction {
-            override fun getConstraints(): Matcher<View> {
-                return CoreMatchers.allOf(
-                    ViewMatchers.isDisplayed(), ViewMatchers.isAssignableFrom(
-                        TextView::class.java
-                    )
-                )
-            }
-
-            override fun perform(uiController: UiController, view: View) {
-                (view as TextView).text = value
-            }
-
-            override fun getDescription(): String {
-                return "replace text"
-            }
-        }
-    }
-
 }
 

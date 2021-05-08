@@ -29,9 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        // Move to the ViewModel.
         val saveScore: Int = viewModel.highScoreLiveData.value!!
-        Log.i("MyTest", "MainActivityOnStop() savescore: $saveScore")
         repository.saveScore(saveScore)
-
     }
 }

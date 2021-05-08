@@ -12,6 +12,10 @@ import com.example.tddscorekeeper.di.MyApplication
 import com.example.tddscorekeeper.main.MainViewModel
 
 
+/**
+ * ViewModel passed in with Fragment factory, this allows for easier testing. Know you can pass in a
+ * mock ViewModel.
+ */
 class ScoreKeeperFragment(private val viewModel: MainViewModel) : Fragment() {
 
     private lateinit var binding: FragmentScoreKeeperBinding
@@ -20,6 +24,7 @@ class ScoreKeeperFragment(private val viewModel: MainViewModel) : Fragment() {
         (requireActivity().application as MyApplication).appComponent.inject(this)
         requireActivity().supportFragmentManager.fragmentFactory = MainFragmentFactory(viewModel)
         super.onCreate(savedInstanceState)
+        // Adds menu to activity.
         setHasOptionsMenu(true)
     }
 
@@ -29,7 +34,7 @@ class ScoreKeeperFragment(private val viewModel: MainViewModel) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score_keeper, container, false )
-
+        // Passes the ViewModel to the binding, to be used in the xml
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 

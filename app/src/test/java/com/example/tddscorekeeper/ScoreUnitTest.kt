@@ -64,30 +64,4 @@ class ScoreUnitTest {
 
     }
 
-    @Test
-    fun myList_size() {
-        score.myList.add(5)
-
-        Assert.assertEquals(1, score.myList.size)
-    }
-
-    @Test
-    fun myList_sizeSpy() {
-        val spylist = spy(score.myList)
-
-        spylist.add(2)
-        spylist.add(3)
-
-        Assert.assertEquals(2, spylist.size)
-
-    }
-
-    @Test
-    fun myList_doReturn() {
-        val spyList = spy(score.myList)
-
-        doReturn(2).`when`(spyList)[0]
-
-        Assert.assertEquals(2, spyList[0])
-    }
 }

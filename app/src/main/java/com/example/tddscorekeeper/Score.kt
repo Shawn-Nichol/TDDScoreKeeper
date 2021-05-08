@@ -3,6 +3,10 @@ package com.example.tddscorekeeper
 import javax.inject.Inject
 
 
+/**
+ * The score class sets the parameters for the score, how much it can go up/down by, saves high score,
+ *
+ */
 class Score @Inject constructor()  {
 
     var highScore = 0
@@ -27,6 +31,4 @@ class Score @Inject constructor()  {
        }
         return currentScore
     }
-
-    val myList: MutableList<Int> = mutableListOf()
 }

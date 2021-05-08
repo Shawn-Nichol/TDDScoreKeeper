@@ -1,5 +1,6 @@
 # TDDScoreKeeper
-TDDScoreKeeper use the following libraryes
+TDDScoreKeeper is an app that use android development best practices with Android jetpack. This app
+is used to practice test driven development.
 
 
 
@@ -18,9 +19,9 @@ TDDScoreKeeper use the following libraryes
   - [Fragment][31] - A basic unit of composable UI.
   - [Layout][32] - Lay out widgets using different algorithms.
 
-- [Testing] [90] Allows you to verify the correctness function behavior, and usability before release.
+- [Testing][90] Allows you to verify the correctness function behavior, and usability before release.
   - [Espresso][91] - Use a espresso to write UI tests.
-  - [Mocktio] [92] - Is a mocking framework, that produces verification errors.
+  - [Mocktio][92] - Is a mocking framework, that produces verification errors.
   - [Robolectic][93] - Is a frame work that brings fast reliable unit tests, Tests run inside the JVM.
 
 
