@@ -10,7 +10,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -20,7 +19,7 @@ class ViewModelUnitTest {
     @get:Rule
     val taskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var viewModel: MyViewModel
+    lateinit var viewModel: MainViewModel
 
     @Mock
     private lateinit var score: Score
@@ -39,7 +38,7 @@ class ViewModelUnitTest {
         score = mock(Score::class.java)
         repository = mock(Repository::class.java)
 
-        viewModel = MyViewModel(score, repository)
+        viewModel = MainViewModel(score, repository)
 
         viewModel.highScoreLiveData.observeForever(highScoreObserver)
         viewModel.scoreLiveData.observeForever(currentScoreObserver)

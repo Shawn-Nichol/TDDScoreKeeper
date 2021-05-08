@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MyViewModel @Inject constructor(val score: Score, val repository: Repository): ViewModel()  {
+class MainViewModel @Inject constructor(val score: Score, val repository: Repository): ViewModel()  {
 
     private val _highScoreLiveData = MutableLiveData<Int>()
     val highScoreLiveData: LiveData<Int> = _highScoreLiveData

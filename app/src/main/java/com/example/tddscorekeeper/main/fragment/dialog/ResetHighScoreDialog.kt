@@ -7,11 +7,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.DialogFragment
 import com.example.tddscorekeeper.R
-import com.example.tddscorekeeper.main.MyViewModel
+import com.example.tddscorekeeper.main.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.lang.IllegalStateException
 
-class ResetHighScoreDialog(val viewModel: MyViewModel) : DialogFragment() {
+class ResetHighScoreDialog(val viewModel: MainViewModel) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         Log.i("Practice", "ResetHighScoreDialog created")

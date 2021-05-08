@@ -9,10 +9,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.tddscorekeeper.R
 import com.example.tddscorekeeper.databinding.FragmentScoreKeeperBinding
 import com.example.tddscorekeeper.di.MyApplication
-import com.example.tddscorekeeper.main.MyViewModel
+import com.example.tddscorekeeper.main.MainViewModel
 
 
-class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
+class ScoreKeeperFragment(private val viewModel: MainViewModel) : Fragment() {
 
     private lateinit var binding: FragmentScoreKeeperBinding
 

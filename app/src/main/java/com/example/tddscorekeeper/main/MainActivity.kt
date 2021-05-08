@@ -12,7 +12,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModel: MyViewModel
+    lateinit var viewModel: MainViewModel
 
     @Inject
     lateinit var repository: Repository

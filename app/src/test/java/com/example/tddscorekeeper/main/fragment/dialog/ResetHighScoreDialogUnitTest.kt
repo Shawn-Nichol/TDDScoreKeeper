@@ -3,12 +3,11 @@ package com.example.tddscorekeeper.main.fragment.dialog
 import androidx.fragment.app.testing.launchFragment
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.tddscorekeeper.R
-import com.example.tddscorekeeper.main.MyViewModel
+import com.example.tddscorekeeper.main.MainViewModel
 import org.hamcrest.core.AllOf.allOf
 import org.junit.Assert.*
 import org.junit.Before
@@ -21,11 +20,11 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class ResetHighScoreDialogUnitTest {
 
-    private lateinit var viewModel: MyViewModel
+    private lateinit var viewModel: MainViewModel
 
     @Before
     fun setup() {
-        viewModel = mock(MyViewModel::class.java)
+        viewModel = mock(MainViewModel::class.java)
 
         launchFragment(themeResId = R.style.Theme_TDDScoreKeeper) {
             return@launchFragment ResetHighScoreDialog(viewModel)

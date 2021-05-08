@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.tddscorekeeper.main.MyViewModel" />
+            type="com.example.tddscorekeeper.main.MainViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

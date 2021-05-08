@@ -20,7 +20,7 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.tddscorekeeper.R
-import com.example.tddscorekeeper.main.MyViewModel
+import com.example.tddscorekeeper.main.MainViewModel
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 import org.hamcrest.core.IsNot.not
@@ -43,7 +43,7 @@ class MyFragmentUnitTest {
 
     private lateinit var scenario: FragmentScenario<ScoreKeeperFragment>
 
-    private lateinit var viewModel: MyViewModel
+    private lateinit var viewModel: MainViewModel
 
     private val mockNavController = mock(NavController::class.java)
 
@@ -51,7 +51,7 @@ class MyFragmentUnitTest {
     fun setup() {
         val myLiveData: MutableLiveData<Int> = MutableLiveData(0)
 
-        viewModel = mock(MyViewModel::class.java)
+        viewModel = mock(MainViewModel::class.java)
 
         `when`(viewModel.scoreLiveData).thenReturn(myLiveData)
 

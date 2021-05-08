@@ -6,11 +6,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.tddscorekeeper.R
-import com.example.tddscorekeeper.main.MyViewModel
+import com.example.tddscorekeeper.main.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
-class ResetScoreDialog(val viewModel: MyViewModel) : DialogFragment() {
+class ResetScoreDialog(val viewModel: MainViewModel) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
