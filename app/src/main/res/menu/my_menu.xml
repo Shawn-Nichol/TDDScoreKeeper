@@ -3,9 +3,9 @@
 
     <item android:id="@+id/menu_reset_score"
         android:icon="@drawable/ic_reset"
-        android:title="@string/reset_score"/>
+        android:title="@string/menu_reset_score"/>
 
     <item android:id="@+id/menu_reset_high_score"
         android:icon="@drawable/ic_reset"
-        android:title="@string/reset_high_score"/>
+        android:title="@string/menu_reset_high_score"/>
 </menu>

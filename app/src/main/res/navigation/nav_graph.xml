@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_scoreKeeperFragment_to_resetScoreDialog"
             app:destination="@id/dest_resetScoreDialog" />
+        <action
+            android:id="@+id/action_dest_scoreKeeperFragment_to_resetHighScoreDialog"
+            app:destination="@id/dest_resetHighScoreDialog" />
     </fragment>
     <dialog
         android:id="@+id/dest_resetScoreDialog"
         android:name="com.example.tddscorekeeper.main.fragment.dialog.ResetScoreDialog"
         android:label="ResetScoreDialog"
      />
+    <dialog
+        android:id="@+id/dest_resetHighScoreDialog"
+        android:name="com.example.tddscorekeeper.main.fragment.dialog.ResetHighScoreDialog"
+        android:label="ResetHighScoreDialog" />
 </navigation>

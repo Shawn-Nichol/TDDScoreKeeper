@@ -11,9 +11,11 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 
 import com.example.tddscorekeeper.main.MainActivity
+import org.hamcrest.core.AllOf.allOf
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+
 
 
 class EndToEnd {
@@ -91,18 +93,60 @@ class EndToEnd {
         onView(withId(R.id.tv_score)).check(matches(withText("3")))
 
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+        onView(withText(R.string.menu_reset_score)).perform(click())
 
-        onView(withText(R.string.reset_score)).perform(click())
+        onView(allOf(withId(android.R.id.button1), withText(R.string.confirm)))
+            .perform(click())
 
         onView(withId(R.id.tv_score)).check(matches(withText("0")))
 
     }
 
     @Test
-    fun resetHighScore() {
+    fun resetScoreCancel() {
+        val btnPresses = 3
+        multiplePlusButtonPresses(btnPresses)
+
+        onView(withId(R.id.tv_score)).check(matches(withText("3")))
+
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
-        onView(withText(R.string.reset_high_score)).perform(click())
+        onView(withText(R.string.menu_reset_score)).perform(click())
+
+        onView(allOf(withId(android.R.id.button2), withText(R.string.cancel)))
+            .perform(click())
+
+        onView(allOf(withId(com.google.android.material.R.id.snackbar_text), withText(R.string.snackbar_score)))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.tv_score)).check(matches(withText("3")))
+    }
+
+    @Test
+    fun resetHighScore() {
+        onView(withId(R.id.tv_highScore)).check(matches(withText("High Score: 5")))
+
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+        onView(withText(R.string.menu_reset_high_score)).perform(click())
+
+        onView(allOf(withId(android.R.id.button1), withText(R.string.confirm)))
+            .perform(click())
+
         onView(withId(R.id.tv_highScore)).check(matches(withText("High Score: 0")))
+
+    }
+
+    @Test
+    fun resetHighScoreCancel() {
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+        onView(withText(R.string.menu_reset_high_score)).perform(click())
+
+        onView(allOf(withId(android.R.id.button2), withText(R.string.cancel)))
+            .perform(click())
+
+        onView(allOf(withId(com.google.android.material.R.id.snackbar_text), withText(R.string.snackbar_high_score)))
+
+
+        onView(withId(R.id.tv_highScore)).check(matches(withText("High Score: 5")))
     }
 
     private fun multiplePlusButtonPresses(btnPresses: Int) {

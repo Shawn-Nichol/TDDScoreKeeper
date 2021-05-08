@@ -2,10 +2,12 @@
     <string name="app_name">TDDScoreKeeper</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="reset_high_score">Reset HighScore</string>
-    <string name="reset_score">Reset score</string>
+    <string name="menu_reset_high_score">Reset HighScore</string>
+    <string name="menu_reset_score">Reset score</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
-    <string name="resetscore_dialog_message">Do you want to reset the score.</string>
+    <string name="message_reset_score">Do you want to reset the score?</string>
+    <string name="message_reset_high_score">Do you want to reset the high score?</string>
     <string name="snackbar_score">Score stays the same</string>
+    <string name="snackbar_high_score">High Score reset</string>
 </resources>

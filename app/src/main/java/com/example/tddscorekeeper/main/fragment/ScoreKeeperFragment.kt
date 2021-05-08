@@ -5,15 +5,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import com.example.tddscorekeeper.R
 import com.example.tddscorekeeper.databinding.FragmentScoreKeeperBinding
 import com.example.tddscorekeeper.di.MyApplication
 import com.example.tddscorekeeper.main.MyViewModel
-import com.example.tddscorekeeper.main.fragment.dialog.ResetScoreDialog
-import com.google.android.material.snackbar.Snackbar
 
 
 class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
@@ -46,14 +42,13 @@ class ScoreKeeperFragment(private val viewModel: MyViewModel) : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         return when(item.itemId) {
             R.id.menu_reset_score -> {
                 findNavController().navigate(R.id.action_scoreKeeperFragment_to_resetScoreDialog)
                 true
             }
             R.id.menu_reset_high_score -> {
-                viewModel.resetHighScore(0)
+                findNavController().navigate(R.id.action_dest_scoreKeeperFragment_to_resetHighScoreDialog)
                 true
             }
 

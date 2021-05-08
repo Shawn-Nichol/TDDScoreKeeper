@@ -4,40 +4,37 @@ import androidx.fragment.app.testing.launchFragment
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.tddscorekeeper.R
 import com.example.tddscorekeeper.main.MyViewModel
 import org.hamcrest.core.AllOf.allOf
-import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.robolectric.RobolectricTestRunner
 
-
-@RunWith(AndroidJUnit4::class)
-class ResetScoreDialogTest {
-
+@RunWith(RobolectricTestRunner::class)
+class ResetHighScoreDialogUnitTest {
 
     private lateinit var viewModel: MyViewModel
 
     @Before
     fun setup() {
         viewModel = mock(MyViewModel::class.java)
-        launchFragment(themeResId = R.style.Theme_TDDScoreKeeper) {
-            return@launchFragment ResetScoreDialog(viewModel)
-        }
 
+        launchFragment(themeResId = R.style.Theme_TDDScoreKeeper) {
+            return@launchFragment ResetHighScoreDialog(viewModel)
+        }
     }
 
     @Test
-    fun `Message`() {
-        onView(withText(R.string.resetscore_dialog_message))
+    fun message() {
+        onView(withText(R.string.message_reset_high_score))
             .inRoot(isDialog())
             .check(matches(isDisplayed()))
     }
@@ -49,7 +46,7 @@ class ResetScoreDialogTest {
             .check(matches(isDisplayed()))
             .perform(ViewActions.click())
 
-        verify(viewModel).resetScore()
+        verify(viewModel).resetHighScore(0)
     }
 
     @Test
@@ -59,6 +56,6 @@ class ResetScoreDialogTest {
             .check(matches(isDisplayed()))
             .check(matches(isClickable()))
 
-        // Click action not preformed because it launches a snackbar that is launched in different fragment.
+        // Click action not performed because it launches a snackbar back in the fragment.
     }
 }

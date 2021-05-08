@@ -28,16 +28,14 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers
 import org.mockito.Mockito.*
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.LooperMode
 
 
 @RunWith(RobolectricTestRunner::class)
 @LooperMode(LooperMode.Mode.PAUSED)
-class MyFragmentTest {
+class MyFragmentUnitTest {
 
     // Executes tasks in the Architecture Components in the same thread
     @get:Rule
@@ -137,7 +135,7 @@ class MyFragmentTest {
 
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
         // Menu items need to reference the view with a string, ID doesn't work.
-        onView(withText(R.string.reset_score))
+        onView(withText(R.string.menu_reset_score))
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
 
@@ -146,12 +144,15 @@ class MyFragmentTest {
 
     @Test
     fun `menu reset high score`() {
+        scenario.onFragment { fragment ->
+            Navigation.setViewNavController(fragment.requireView(), mockNavController)
+        }
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
-        onView(withText(R.string.reset_high_score))
+        onView(withText(R.string.menu_reset_high_score))
             .check(ViewAssertions.matches(isDisplayed()))
             .perform(ViewActions.click())
 
-        verify(viewModel).resetHighScore(0)
+        verify(mockNavController).navigate(R.id.action_dest_scoreKeeperFragment_to_resetHighScoreDialog)
     }
 
 
