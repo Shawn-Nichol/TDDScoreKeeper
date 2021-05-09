@@ -1,7 +1,9 @@
+![TDD]
 # TDDScoreKeeper
 TDDScoreKeeper is an app that use android development best practices with Android jetpack. This app
 is used to practice test driven development.
 
+![TDD](https://user-images.githubusercontent.com/30714313/117563199-753a3f80-b061-11eb-9dc4-a208c0695aea.PNG)
 
 
 ## Libraries used
