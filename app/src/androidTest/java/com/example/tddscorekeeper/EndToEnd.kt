@@ -1,15 +1,12 @@
 package com.example.tddscorekeeper
 
-
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
-
 import com.example.tddscorekeeper.main.MainActivity
 import org.hamcrest.core.AllOf.allOf
 import org.junit.After
@@ -17,11 +14,10 @@ import org.junit.Before
 import org.junit.Test
 
 
-
 class EndToEnd {
 
 
-    lateinit var scenario: ActivityScenario<MainActivity>
+    private lateinit  var scenario: ActivityScenario<MainActivity>
 
     @Before
     fun setup() {
@@ -42,7 +38,7 @@ class EndToEnd {
 
     @Test
     fun loadActivity() {
-        onView(withId(R.id.main_container)).check(matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.main_container)).check(matches(isDisplayed()))
 
     }
 
@@ -148,6 +144,8 @@ class EndToEnd {
 
         onView(withId(R.id.tv_highScore)).check(matches(withText("High Score: 5")))
     }
+
+
 
     private fun multiplePlusButtonPresses(btnPresses: Int) {
         var pressCounter = 0

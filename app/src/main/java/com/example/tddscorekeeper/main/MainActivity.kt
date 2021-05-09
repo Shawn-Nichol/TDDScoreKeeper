@@ -2,9 +2,7 @@ package com.example.tddscorekeeper.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.tddscorekeeper.R
-import com.example.tddscorekeeper.Repository
 import com.example.tddscorekeeper.di.MyApplication
 import com.example.tddscorekeeper.main.fragment.MainFragmentFactory
 import javax.inject.Inject
@@ -13,9 +11,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModel: MainViewModel
-
-    @Inject
-    lateinit var repository: Repository
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,8 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        // Move to the ViewModel.
-        val saveScore: Int = viewModel.highScoreLiveData.value!!
-        repository.saveScore(saveScore)
+        viewModel.saveHighScore()
     }
 }

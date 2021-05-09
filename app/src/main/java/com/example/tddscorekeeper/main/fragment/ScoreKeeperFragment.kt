@@ -32,7 +32,7 @@ class ScoreKeeperFragment(private val viewModel: MainViewModel) : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score_keeper, container, false )
         // Passes the ViewModel to the binding, to be used in the xml
         binding.viewModel = viewModel

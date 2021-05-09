@@ -3,13 +3,11 @@ package com.example.tddscorekeeper
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.spy
 
 
 class ScoreUnitTest {
 
-    lateinit var score: Score
+    private lateinit var score: Score
 
     @Before
     fun setup() {

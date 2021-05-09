@@ -1,28 +1,19 @@
 package com.example.tddscorekeeper.main.fragment
 
-import android.view.View
-import android.widget.TextView
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.tddscorekeeper.R
 import com.example.tddscorekeeper.main.MainViewModel
-import org.hamcrest.CoreMatchers
-import org.hamcrest.Matcher
 import org.hamcrest.core.IsNot.not
 import org.junit.After
 import org.junit.Before
@@ -31,7 +22,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.*
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.LooperMode
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -43,7 +33,7 @@ class MyFragmentUnitTest {
 
     private lateinit var scenario: FragmentScenario<ScoreKeeperFragment>
 
-    private var viewModel: MainViewModel = mock(MainViewModel::class.java)
+    private var viewModel = mock(MainViewModel::class.java)
 
     private val mockNavController = mock(NavController::class.java)
 
@@ -113,6 +103,7 @@ class MyFragmentUnitTest {
 
     @Test
     fun `menu reset score`() {
+        // Need to pass mockNavController for navigation actions to work.
         scenario.onFragment{ fragment ->
             Navigation.setViewNavController(fragment.requireView(), mockNavController)
         }

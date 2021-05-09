@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class ScorePreferenceStorageUnitTest {
-    lateinit var sharedPre: FakeStorage
+    private lateinit var sharedPre: FakeStorage
 
     @Before
     fun setup() {

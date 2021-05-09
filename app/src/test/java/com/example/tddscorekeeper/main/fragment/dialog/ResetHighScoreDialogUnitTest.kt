@@ -55,6 +55,6 @@ class ResetHighScoreDialogUnitTest {
             .check(matches(isDisplayed()))
             .check(matches(isClickable()))
 
-        // Click action not performed because it launches a snackbar back in the fragment.
+        // Click action not performed because it launches a SnackBar back in the fragment.
     }
 }

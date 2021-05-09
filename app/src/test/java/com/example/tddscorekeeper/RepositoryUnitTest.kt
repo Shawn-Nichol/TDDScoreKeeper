@@ -1,6 +1,6 @@
 package com.example.tddscorekeeper
 
-import com.example.tddscorekeeper.storage.HIGHSCORE_KEY
+import com.example.tddscorekeeper.storage.HIGH_SCORE_KEY
 import com.example.tddscorekeeper.storage.Storage
 import org.junit.Before
 import org.junit.Test
@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class RepositoryUnitTest {
 
 
-    lateinit var repository: Repository
+    private lateinit var repository: Repository
 
     @Mock
     lateinit var storage: Storage
@@ -29,14 +29,14 @@ class RepositoryUnitTest {
         val score = 20
         repository.saveScore(20)
 
-        verify(storage).setInt(HIGHSCORE_KEY, score)
+        verify(storage).setInt(HIGH_SCORE_KEY, score)
     }
 
     @Test
     fun loadScore() {
         repository.loadHighScore()
 
-        verify(storage).getInt(HIGHSCORE_KEY)
+        verify(storage).getInt(HIGH_SCORE_KEY)
     }
 
 

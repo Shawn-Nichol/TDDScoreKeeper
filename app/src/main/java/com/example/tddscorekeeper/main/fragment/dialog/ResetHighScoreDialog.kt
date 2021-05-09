@@ -2,7 +2,6 @@ package com.example.tddscorekeeper.main.fragment.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.DialogFragment
@@ -18,10 +17,10 @@ class ResetHighScoreDialog(val viewModel: MainViewModel) : DialogFragment() {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             builder.setMessage(R.string.message_reset_high_score)
-                .setPositiveButton(R.string.confirm, DialogInterface.OnClickListener { dialog, it ->
+                .setPositiveButton(R.string.confirm) { _, _ ->
                     viewModel.resetHighScore(0)
-                })
-                .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener { dialog, it ->
+                }
+                .setNegativeButton(R.string.cancel) { _, _ ->
                     Snackbar.make(
                         requireActivity()
                             .findViewById(R.id.scoreKeeperFragment), getString(
@@ -30,7 +29,7 @@ class ResetHighScoreDialog(val viewModel: MainViewModel) : DialogFragment() {
                         2000
                     )
                         .show()
-                })
+                }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

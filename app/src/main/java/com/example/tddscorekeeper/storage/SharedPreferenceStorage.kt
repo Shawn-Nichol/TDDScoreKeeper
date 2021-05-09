@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 
 const val SHARED_PREF_KEY = "SharedPreferences Key"
-const val HIGHSCORE_KEY = "SharedPreference high score"
+const val HIGH_SCORE_KEY = "SharedPreference high score"
 
 class SharedPreferenceStorage @Inject constructor(context: Context) :Storage{
     private val sharedPreferences = context.getSharedPreferences(SHARED_PREF_KEY, Context.MODE_PRIVATE)

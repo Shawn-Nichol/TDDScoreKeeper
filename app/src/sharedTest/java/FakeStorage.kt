@@ -3,7 +3,7 @@ package com.example.tddscorekeeper
 import com.example.tddscorekeeper.storage.Storage
 import javax.inject.Inject
 
-class FakeStorage @Inject constructor() : Storage{
+class   FakeStorage @Inject constructor() : Storage{
 
     var highScore = 5
 

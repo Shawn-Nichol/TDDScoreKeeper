@@ -56,6 +56,6 @@ class ResetScoreDialogUnitTest {
             .check(matches(isDisplayed()))
             .check(matches(isClickable()))
 
-        // Click action not performed because it launches a snackbar that is launched in different fragment.
+        // Click action not performed because it launches a SnackBar that is launched in different fragment.
     }
 }

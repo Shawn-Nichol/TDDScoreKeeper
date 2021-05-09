@@ -19,7 +19,7 @@ class ViewModelUnitTest {
     @get:Rule
     val taskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     @Mock
     private lateinit var score: Score
@@ -35,14 +35,10 @@ class ViewModelUnitTest {
 
     @Before
     fun setup() {
-        score = mock(Score::class.java)
-        repository = mock(Repository::class.java)
-
         viewModel = MainViewModel(score, repository)
 
         viewModel.highScoreLiveData.observeForever(highScoreObserver)
         viewModel.scoreLiveData.observeForever(currentScoreObserver)
-
     }
 
 
@@ -138,7 +134,6 @@ class ViewModelUnitTest {
 
         // Then results
         Assert.assertEquals(0, viewModel.scoreLiveData.value)
-
     }
 
     @Test
@@ -166,6 +161,15 @@ class ViewModelUnitTest {
         viewModel.resetHighScore(0)
         verify(repository).saveScore(0)
         Assert.assertEquals(viewModel.highScoreLiveData.value, 0)
+    }
+
+    @Test
+    fun `Save high score`() {
+        `when`(repository.loadHighScore()).thenReturn(10)
+        viewModel.loadHighScore()
+        viewModel.saveHighScore()
+
+        verify(repository).saveScore(10)
     }
 
 }
