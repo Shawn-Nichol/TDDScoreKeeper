@@ -36,6 +36,7 @@ class ScoreKeeperFragment(private val viewModel: MainViewModel) : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score_keeper, container, false )
         // Passes the ViewModel to the binding, to be used in the xml
         binding.viewModel = viewModel
+        // Allows for livedata to be used, when livedata value changes the Vi    ew will update.
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root

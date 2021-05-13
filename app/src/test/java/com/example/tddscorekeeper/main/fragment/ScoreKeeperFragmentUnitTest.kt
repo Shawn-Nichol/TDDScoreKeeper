@@ -25,7 +25,7 @@ import org.robolectric.RobolectricTestRunner
 
 
 @RunWith(RobolectricTestRunner::class)
-class MyFragmentUnitTest {
+class ScoreKeeperFragmentUnitTest {
 
     // Executes tasks in the Architecture Components in the same thread
     @get:Rule

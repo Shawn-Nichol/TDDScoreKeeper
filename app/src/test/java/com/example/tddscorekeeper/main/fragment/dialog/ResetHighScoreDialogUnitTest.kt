@@ -3,6 +3,7 @@ package com.example.tddscorekeeper.main.fragment.dialog
 import androidx.fragment.app.testing.launchFragment
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -43,7 +44,7 @@ class ResetHighScoreDialogUnitTest {
         onView(allOf(withId(android.R.id.button1), withText(R.string.confirm)))
             .inRoot(isDialog())
             .check(matches(isDisplayed()))
-            .perform(ViewActions.click())
+            .perform(click())
 
         verify(viewModel).resetHighScore(0)
     }

@@ -22,13 +22,10 @@ class ResetHighScoreDialog(val viewModel: MainViewModel) : DialogFragment() {
                 }
                 .setNegativeButton(R.string.cancel) { _, _ ->
                     Snackbar.make(
-                        requireActivity()
-                            .findViewById(R.id.scoreKeeperFragment), getString(
-                            R.string.snackbar_high_score
-                        ),
+                        requireActivity().findViewById(R.id.scoreKeeperFragment),
+                        getString(R.string.snackbar_high_score),
                         2000
-                    )
-                        .show()
+                    ).show()
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
